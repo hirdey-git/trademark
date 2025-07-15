@@ -8,11 +8,11 @@ st.title("🔍 AI-Powered Trademark Search Tool")
 st.markdown("Search the USPTO database for existing or similar trademarks using AI.")
 
 query = st.text_input("Enter your desired word mark", placeholder="e.g., Let’s do it")
-industry = st.text_input("Enter relevant industry or classification", placeholder="e.g., clothing, food, software")
+industry = st.text_input("Enter relevant industry or classification (optional)", placeholder="e.g., clothing, food, software")
 
 if st.button("Search"):
-    if not query.strip() or not industry.strip():
-        st.warning("Please enter both word mark and industry.")
+    if not query.strip():
+        st.warning("Please enter a word mark.")
     else:
         with st.spinner("Searching USPTO..."):
             results = search_trademark_tess(query)

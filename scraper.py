@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def search_trademark_tess(term):
-    search_url = "https://tmsearch.uspto.gov/bin/showfield"
+    search_url = "https://tmsearch.uspto.gov/search/search-information"
     params = {
         'f': 'toc',
         'state': '4802:qnn9gs.1.1',

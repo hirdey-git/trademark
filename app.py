@@ -23,23 +23,25 @@ if st.button("Check Trademark Risk"):
     else:
         # Format prompt
         prompt = f"""
-You are a legal and business research assistant with deep knowledge of public trademark databases, including the USPTO, EUIPO, and WIPO records up to 2024.
+You are a legal and business research assistant with deep knowledge of public trademark databases (like USPTO, EUIPO, WIPO), but you cannot directly access them in real-time.
+
+Instead, use your training data, publicly known trademarks up to 2024, and reasonable inferences to simulate a trademark research summary.
 
 Given the phrase: "{trademark_text}"
 
-Your task is to determine if this phrase is registered as a trademark or commonly used as a brand or product name. Provide a detailed summary that includes:
+Provide a well-structured summary that includes:
 
-1. Whether "{trademark_text}" is a registered or known trademark.
-2. The types of goods/services it is associated with (e.g., beer, clothing, software).
-3. Who owns the trademark (e.g., company, individual).
-4. Any known jurisdictions where it is registered (e.g., US, EU, Canada).
-5. The relevant trademark classes (e.g., Class 32 for beverages).
-6. Whether it is active, abandoned, or pending.
-7. Any public legal or commercial risks involved in using a similar name.
+1. Whether "{trademark_text}" is known as a registered or commonly used trademark.
+2. What types of goods or services it is associated with (e.g., software, beverages, clothing).
+3. Any known or likely owner(s) of the mark.
+4. Common jurisdictions it might be registered in (e.g., US, EU).
+5. Relevant trademark classes (e.g., Class 32 for beverages).
+6. Whether it is likely active, pending, or abandoned.
+7. Any potential risks of using a similar name in the {industry} industry.
 
-Conclude with a plain-English risk assessment for using “{trademark_text}” as a brand name for a new business in the {industry} industry.
+Conclude with a clear plain-English risk rating for using “{trademark_text}” in the {industry} industry (e.g., low, medium, or high risk) — even if it's an estimate based on known examples.
 
-Respond in a structured and concise format.
+Be concise, factual, and acknowledge that this is a simulated, non-authoritative review based on known data up to 2024.
 """
 
         # Call OpenAI

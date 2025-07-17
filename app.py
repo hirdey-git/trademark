@@ -52,7 +52,9 @@ Respond in a structured and concise format.
                         {"role": "user", "content": prompt}
                     ]
                 )
-                result = response['choices'][0]['message']['content']
+                
+                result = response.choices[0].message.content
+
                 st.success("Trademark analysis complete:")
                 st.markdown(result)
         except Exception as e:

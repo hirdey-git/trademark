@@ -58,7 +58,8 @@ Be concise, factual, and clearly structured in sections.
                         {"role": "user", "content": prompt}
                     ]
                 )
-                result = response['choices'][0]['message']['content']
+                result = response.choices[0].message.content
+
                 st.success("Trademark analysis complete:")
                 st.markdown(result)
         except Exception as e:

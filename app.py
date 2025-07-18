@@ -39,10 +39,14 @@ Provide a well-structured summary that includes:
 6. Whether it is likely active, pending, or abandoned.
 7. Any potential risks of using a similar name in the {industry} industry.
 
-Conclude with a clear plain-English risk rating for using “{trademark_text}” in the {industry} industry (e.g., low, medium, or high risk) — even if it's an estimate based on known examples.
+Conclude with:
+- A plain-English risk rating for using “{trademark_text}” in the {industry} industry (low, medium, high)
+- A short disclaimer stating that this is a simulated estimate, not legal advice
+- A “Resources Used” section listing typical public sources this analysis is based on (e.g., USPTO TSDR, EUIPO TMView, WIPO Madrid Monitor, trademark classification standards, etc.)
 
-Be concise, factual, and acknowledge that this is a simulated, non-authoritative review based on known data up to 2024.
+Be concise, factual, and clearly structured in sections.
 """
+
 
         # Call OpenAI
         try:
@@ -54,9 +58,7 @@ Be concise, factual, and acknowledge that this is a simulated, non-authoritative
                         {"role": "user", "content": prompt}
                     ]
                 )
-                
-                result = response.choices[0].message.content
-
+                result = response['choices'][0]['message']['content']
                 st.success("Trademark analysis complete:")
                 st.markdown(result)
         except Exception as e:

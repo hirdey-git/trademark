@@ -62,35 +62,41 @@ if st.button("Check Trademark Risk"):
 
         # 2. Common Law web mentions
         common_law_hits = fetch_common_law_mentions(trademark_text)
-        common_law_section = "\n".join(
-            [f"{i+1}. **{title}** – [Link]({link})" for i, (title, link) in enumerate(common_law_hits)]
-        ) or "No notable common law hits found."
+        citation_links = "\n".join(
+            [f"{i+1}. [{title}]({link})" for i, (title, link) in enumerate(common_law_hits)]
+        ) or "No common law citations found."
+
+        common_law_note = (
+            "### Common Law Mentions (from public web search)\n\n"
+            "Below are real-world citations gathered from DuckDuckGo that may indicate existing common law usage of the phrase:\n\n"
+            f"{citation_links}\n\n"
+        )
 
         # 3. Generate prompt
         prompt = f"""
-You are a legal and business research assistant with access to public trademark databases (USPTO, EUIPO, WIPO) and general web presence awareness.
+You are a legal and business research assistant with access to public trademark databases (USPTO, EUIPO, WIPO) and awareness of publicly available web information.
 
 Step 1: You searched for "{trademark_text}" using the USPTO RapidAPI trademark database.
 Step 2: {"Trademark(s) were found." if found_in_rapidapi else "No exact matches found in the trademark registry."}
 
-You also checked common law usage by reviewing general web presence for the phrase.
+You also checked common law usage through general web search results.
 
 Given the phrase: "{trademark_text}"
 
-Provide a summary including:
-1. Whether it's registered or known as a trademark.
-2. Associated goods/services.
-3. Likely owner(s), jurisdictions, and class codes.
-4. If it is active, pending, or abandoned.
-5. Common law conflicts from existing businesses, domains, or media uses.
+Provide a summary that includes:
+1. Whether it is known as a registered or commonly used trademark.
+2. What goods or services it's associated with.
+3. Known or likely owner(s).
+4. Jurisdictions and trademark classes.
+5. Whether it is active, pending, or abandoned.
+6. Any common law risk based on other businesses, domains, or public use.
 
-**Common Law Mentions:**  
-{common_law_section}
+{common_law_note}
 
 Conclude with:
-- A risk rating for using “{trademark_text}” in the {industry} industry (low, medium, high)
-- Disclaimer that this is a simulated summary, not legal advice.
-- List resources used.
+- A risk rating (low, medium, high) for using “{trademark_text}” in the {industry} industry
+- Disclaimer that this is a simulated summary, not legal advice
+- Resources used (including USPTO and citation links above)
 """
 
         # 4. Call OpenAI

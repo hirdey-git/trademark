@@ -7,11 +7,8 @@ import requests
 load_dotenv()
 
 # Load API keys from Streamlit Secrets
-#openai_api_key = st.secrets["OPENAI"]["API_KEY"]
-#rapidapi_key = st.secrets["rapidapi"]["key"]
-
-openai_api_key = st.secrets["OPENAI_API_KEY"]
-rapidapi_key = st.secrets["RAPID_API_KEY"]
+openai_api_key = st.secrets["OPENAI"]["API_KEY"]
+rapidapi_key = st.secrets["RAPIDAPI"]["KEY"]
 
 # Initialize OpenAI client
 client = OpenAI(api_key=openai_api_key)

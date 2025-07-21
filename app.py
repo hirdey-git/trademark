@@ -107,7 +107,8 @@ Conclude with:
                     messages=[
                         {"role": "system", "content": "You are a trademark and business research assistant."},
                         {"role": "user", "content": prompt}
-                    ]
+                    ],
+                    temperature=0
                 )
                 result = response.choices[0].message.content
                 st.success("Trademark analysis complete:")

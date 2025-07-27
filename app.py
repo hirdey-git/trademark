@@ -72,7 +72,18 @@ if st.button("Check Trademark Risk"):
             f"{citation_links}\n\n"
         )
 
-        # 3. Generate prompt
+        # 3. Resources used (citations)
+        resource_citations = """\
+### 📚 Resources & Citations Used:
+- USPTO TESS: [https://tmsearch.uspto.gov](https://tmsearch.uspto.gov)
+- USPTO API (RapidAPI): [https://rapidapi.com/markableai/api/uspto-trademark-search](https://rapidapi.com/markableai/api/uspto-trademark-search)
+- EUIPO eSearch: [https://euipo.europa.eu/ohimportal/en/esearch](https://euipo.europa.eu/ohimportal/en/esearch)
+- WIPO Brand Database: [https://www3.wipo.int/branddb/en/](https://www3.wipo.int/branddb/en/)
+- Common Law Mentions via DuckDuckGo: [https://www.duckduckgo.com](https://www.duckduckgo.com)
+- WHOIS Domain Search: [https://lookup.icann.org/en](https://lookup.icann.org/en)
+"""
+
+        # 4. Generate prompt
         prompt = f"""
 You are a legal and business research assistant with access to public trademark databases (USPTO, EUIPO, WIPO) and awareness of publicly available web information.
 
@@ -96,10 +107,11 @@ Provide a summary that includes:
 Conclude with:
 - A risk rating (low, medium, high) for using “{trademark_text}” in the {industry} industry
 - Disclaimer that this is a simulated summary, not legal advice
-- Resources used (including USPTO and citation links above)
+
+{resource_citations}
 """
 
-        # 4. Call OpenAI
+        # 5. Call OpenAI
         try:
             with st.spinner("Analyzing..."):
                 response = client.chat.completions.create(
